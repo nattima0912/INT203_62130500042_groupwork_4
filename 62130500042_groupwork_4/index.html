@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Vue Js - HelloWorld App</title>
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+  <!-- Using via Google Web Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- https://tailwindcss.com/docs/installation -->
+  <!-- Using Tailwind via CDN -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+  <div id="app" class="  w-screen bg-gradient-to-r from-purple-300 to-pink-200 h-screen  ">
+
+    <h1 class="text-3xl font-serif font-medium  pt-10 text-center text-gray-600 ">Aurora Borealis ( {{ countUnPic }} )</h1>
+
+    <div class="flex justify-end  mr-5">
+      <input v-show="search.click" @keyup="searchPic"
+        class="ml-2 p-1 w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none text-black rounded-sm"
+        type="text" v-model="box" placeholder="Please enter text for searching photos">
+
+      <button class="ml-1 p-1 rounded-sm focus:outline-none bg-blue-500" v-show="search.click"
+        @click="Search">Cancel</button>
+
+      <span class="material-icons mt-1 ml-2" @click="Search" v-show="search.notclick">search</span>
+
+    </div>
+
+    <p class="text-center mt-14 text-2xl text-gray-600" v-show="noPic"> No Picture </p>
+
+    <ul class="grid grid-cols-3  mt-10  ">
+      <li v-show="travel.show" v-for="(travel,index) in travels"
+        class="px-4 text-center text-gray-600 pt-8 font-mono text-xl ">
+        {{travel.text}}
+        <img class=" h-90 w-100 px-4 pt-8 " :src="travel.pic" @click="openPic(index)">
+
+        <button @click="toggleHeart(index)">
+          <span class="material-icons mt-5" v-show="travel.notlike">favorite_border</span>
+        </button>
+
+        <button @click="toggleHeart(index)">
+          <span class="material-icons mt-5" style=color:red v-show="travel.like">favorite</span>
+        </button>
+
+      </li>
+    </ul>
+    <div v-show="showImg" class="bg-black  item-center w-full flex justify-center absolute mt-4 ">
+      <button @click="closePic">
+        <span class="material-icons absolute top-0 right-0 text-3xl text-white">
+          close
+        </span>
+      </button>
+      <div class="md:py-10">
+        <img v-bind:src="image" class=" item-center " height="100" width="500">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- my main.js -->
+  <script src="./main.js">
+  </script>
+</body>
+
+</html>
